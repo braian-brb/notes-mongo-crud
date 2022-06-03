@@ -8,6 +8,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { router as indexRouter} from './routes/index.routes.js'
+import { router as notesRouter } from './routes/notes.routes.js'
 //--------------------------------------------- INITIALIZATIONS ------------------------------------------------------
 
 export const app = express();
@@ -36,6 +37,7 @@ app.use(json())
 
 //--------------------------------------------- ROUTES  ------------------------------------------------------
 app.use(indexRouter)
+app.use(notesRouter)
 
 //--------------------------------------------- STATIC FILES  ------------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')))
