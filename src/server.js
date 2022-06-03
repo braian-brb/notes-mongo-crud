@@ -6,9 +6,10 @@ import { engine } from 'express-handlebars'
 import { dirname } from 'path';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import { router as indexRouter} from './routes/index.routes.js'
 import { router as notesRouter } from './routes/notes.routes.js'
+import morgan from 'morgan';
+
 //--------------------------------------------- INITIALIZATIONS ------------------------------------------------------
 
 export const app = express();
@@ -31,6 +32,7 @@ app.set('view engine', '.hbs')
 //--------------------------------------------- MIDDLEWARES  ------------------------------------------------------
 app.use(urlencoded({extended: false}))
 app.use(json())
+app.use(morgan('dev'));
 
 //--------------------------------------------- GLOBAL VAR ------------------------------------------------------
 
