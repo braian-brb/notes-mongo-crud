@@ -1,12 +1,13 @@
+import dotenv from 'dotenv'
+dotenv.config();
 import express from 'express'
 import {json, urlencoded} from 'express'
 import { engine } from 'express-handlebars'
 import { dirname } from 'path';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv'
-dotenv.config();
 
+import { router as indexRouter} from './routes/index.routes.js'
 //--------------------------------------------- INITIALIZATIONS ------------------------------------------------------
 
 export const app = express();
@@ -34,9 +35,7 @@ app.use(json())
 
 
 //--------------------------------------------- ROUTES  ------------------------------------------------------
-app.get('/', (req, res) =>{
-    res.render('index')
-})
+app.use(indexRouter)
 
 //--------------------------------------------- STATIC FILES  ------------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')))
