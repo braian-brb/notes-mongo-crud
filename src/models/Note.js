@@ -12,7 +12,8 @@ const NoteSchema = new Schema({
         required: true,
         trim: true,
     },
+},{
     timestamps: true,
 })
 
-export default model('Note', NoteSchema);
+export default model('Note', NoteSchema); // if you want use , and name of coll

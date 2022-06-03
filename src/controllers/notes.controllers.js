@@ -1,16 +1,21 @@
 export const notesCtrl = {};
+import Note from '../models/Note.js'
 
 notesCtrl.renderNoteForm = (req, res) =>{
     res.render('notes/new-note');
 }
 
-notesCtrl.createNewNote = (req, res) =>{
-    console.log(req.body)
+notesCtrl.createNewNote = async (req, res) =>{
+    const {title, description} = req.body;
+
+    const newNote = new Note({title, description})
+    await newNote.save()
     res.send('new-note')
 }
 
-notesCtrl.renderNotes = (req, res) =>{
-    res.render('render notes')
+notesCtrl.renderNotes = async (req, res) =>{
+    const notes = await Note.find().lean();
+    res.render('notes/all-notes', {notes})
 }
 
 notesCtrl.renderEditForm = (req, res) =>{
