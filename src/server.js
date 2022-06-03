@@ -3,6 +3,8 @@ import {json, urlencoded} from 'express'
 import { dirname } from 'path';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv'
+dotenv.config();
 
 //--------------------------------------------- INITIALIZATIONS ------------------------------------------------------
 
