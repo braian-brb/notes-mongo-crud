@@ -8,6 +8,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { router as indexRouter} from './routes/index.routes.js'
 import { router as notesRouter } from './routes/notes.routes.js'
+import { router as usersRouter } from './routes/users.routes.js'
+
 import morgan from 'morgan';
 import methodOverride from 'method-override';
 import  flash  from 'connect-flash'
@@ -52,6 +54,7 @@ app.use((req, res, next) => {
 //--------------------------------------------- ROUTES  ------------------------------------------------------
 app.use(indexRouter)
 app.use(notesRouter)
+app.use('/users',usersRouter)
 
 //--------------------------------------------- STATIC FILES  ------------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')))
