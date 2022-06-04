@@ -10,7 +10,7 @@ notesCtrl.createNewNote = async (req, res) =>{
 
     const newNote = new Note({title, description})
     await newNote.save()
-    res.send('new-note')
+    res.redirect('/notes')
 }
 
 notesCtrl.renderNotes = async (req, res) =>{
@@ -26,6 +26,8 @@ notesCtrl.updateNote = (req, res) =>{
     res.send('update note')
 }
 
-notesCtrl.deleteNote = (req, res) =>{
-    res.send('deleting note')
+notesCtrl.deleteNote = async (req, res) =>{
+    const {id} = req.params
+    await Note.findByIdAndDelete(id)
+    res.redirect('/notes')
 }

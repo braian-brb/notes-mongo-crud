@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import { router as indexRouter} from './routes/index.routes.js'
 import { router as notesRouter } from './routes/notes.routes.js'
 import morgan from 'morgan';
+import methodOverride from 'method-override';
 
 //--------------------------------------------- INITIALIZATIONS ------------------------------------------------------
 
@@ -33,6 +34,7 @@ app.set('view engine', '.hbs')
 app.use(urlencoded({extended: false}))
 app.use(json())
 app.use(morgan('dev'));
+app.use(methodOverride('_method'))
 
 //--------------------------------------------- GLOBAL VAR ------------------------------------------------------
 
