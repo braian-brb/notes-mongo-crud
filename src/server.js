@@ -10,6 +10,8 @@ import { router as indexRouter} from './routes/index.routes.js'
 import { router as notesRouter } from './routes/notes.routes.js'
 import morgan from 'morgan';
 import methodOverride from 'method-override';
+import  flash  from 'connect-flash'
+import session from 'express-session';
 
 //--------------------------------------------- INITIALIZATIONS ------------------------------------------------------
 
@@ -35,9 +37,17 @@ app.use(urlencoded({extended: false}))
 app.use(json())
 app.use(morgan('dev'));
 app.use(methodOverride('_method'))
-
-//--------------------------------------------- GLOBAL VAR ------------------------------------------------------
-
+app.use(session({
+    secret: 'my-secret',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(flash())
+//--------------------------------------------- GLOBAL VAR ------(Middleware)------------------------------------------------
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg')
+    next();
+})
 
 //--------------------------------------------- ROUTES  ------------------------------------------------------
 app.use(indexRouter)
