@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { notesCtrl } from '../controllers/notes.controllers.js';
+import { helpers } from '../middlewares/isAuth.js';
+const { isAuth } = helpers
 
 export const router = Router();
 const {
@@ -11,12 +13,12 @@ const {
   deleteNote,
 } = notesCtrl;
 
-router.get('/notes/add', renderNoteForm);
-router.post('/notes/new-note', createNewNote);
+router.get('/notes/add', isAuth, renderNoteForm);
+router.post('/notes/new-note', isAuth, createNewNote);
 
-router.get('/notes', renderNotes);
+router.get('/notes', isAuth, renderNotes);
 
-router.get('/notes/edit/:id', renderEditForm);
-router.put('/notes/edit/:id', updateNote);
+router.get('/notes/edit/:id', isAuth, renderEditForm);
+router.put('/notes/edit/:id', isAuth, updateNote);
 
-router.delete('/notes/delete/:id', deleteNote);
+router.delete('/notes/delete/:id', isAuth, deleteNote);
